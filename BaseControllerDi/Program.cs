@@ -1,7 +1,22 @@
+using BaseControllerDi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IHelloService, HelloService>();
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddScoped<ITimeService, LocalTimeService>();
+}
+else
+{
+    builder.Services.AddScoped<ITimeService, FakeTimeService>();
+}
+
+
 
 var app = builder.Build();
 
