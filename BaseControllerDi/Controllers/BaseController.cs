@@ -7,6 +7,9 @@ namespace BaseControllerDi.Controllers
 
     public abstract class BaseController<T> : Controller where T : BaseController<T>
     {
+        //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-context?view=aspnetcore-7.0
+
+
         private IHelloService? _helloService;
         protected IHelloService HelloService => _helloService ??= HttpContext.RequestServices.GetRequiredService<IHelloService>();
         
