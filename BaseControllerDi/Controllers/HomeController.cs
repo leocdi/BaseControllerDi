@@ -5,24 +5,15 @@ using System.Diagnostics;
 
 namespace BaseControllerDi.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : BaseController<HomeController>
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            IHelloService helloService,
-            ITimeService timeService)
-            : base(helloService, timeService)
-        {
-            _logger = logger;
-        }
 
         public async Task<IActionResult> Index()
         {
-            var helloMsg = _helloService.SayHello();
-            var dateTimeNow = await _timeService.GetDateTimeNowAsync();
-            _logger.LogInformation("Index call {time} {message}", dateTimeNow, helloMsg);
+            var helloMsg = HelloService.SayHello();
+            var dateTimeNow = await TimeService.GetDateTimeNowAsync();
+            Logger.LogInformation("Index call {time} {message}", dateTimeNow, helloMsg);
 
 
             return View(new HomeIndexViewModel() { Message = $"{helloMsg} {dateTimeNow}" });
