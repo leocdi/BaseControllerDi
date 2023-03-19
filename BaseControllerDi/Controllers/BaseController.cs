@@ -17,6 +17,6 @@ namespace BaseControllerDi.Controllers
         protected ITimeService TimeService => _timeService ??= HttpContext.RequestServices.GetRequiredService<ITimeService>();
 
         private ILogger<T>? _logger;
-        protected ILogger<T> Logger => _logger ??= HttpContext.RequestServices.GetService<ILogger<T>>(); //GetService peux renvoyer null d'ou le warning...
+        protected ILogger<T> Logger => _logger ??= HttpContext.RequestServices.GetService<ILogger<T>>(); //GetService peut renvoyer null d'ou le warning...
     }
 }
